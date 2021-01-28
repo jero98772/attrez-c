@@ -1,4 +1,4 @@
-CFLAGS = -Wall -Wextra -pedantic -std=c18
+CFLAGS = -g -Wall -Wextra -pedantic -std=c18
 CXXFLAGS = -std=c++17
 
 test_tools.o: test_tools.h test_tools.c

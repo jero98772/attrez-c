@@ -13,68 +13,63 @@
  * or something....also make it so that this can
  * be set at init */
 
-#include <stdarg.h>
 #include <stddef.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define GROWTH_MULT 1.5
 
-#define MVEC_DECL(TYPE, NAME)                          \
-    typedef struct {                                   \
-        size_t sz, cap;                                \
-        TYPE *dat;                                     \
-    } mvec##NAME;                                      \
-                                                       \
-    void mvec##NAME##_init(mvec##NAME *, size_t, ...); \
-    void mvec##NAME##_resz(mvec##NAME *, size_t);      \
-    mvec##NAME mvec##NAME##_cp(mvec##NAME *);          \
-    void mvec##NAME##_pb(mvec##NAME *, TYPE);          \
-    TYPE *mvec##NAME##_ba(mvec##NAME *);               \
-    void mvec##NAME##_pop(mvec##NAME *);               \
-    void mvec##NAME##_destr(mvec##NAME *, ...);
+#define GROWTH_MULT (1.5)
 
-#define MVEC_IMPL(TYPE, NAME)                                        \
-    void mvec##NAME##_init(mvec##NAME *v, size_t cap, ...) {         \
-        v->dat = (TYPE *)malloc(cap * sizeof(TYPE));                 \
-                                                                     \
-        v->sz = 0, v->cap = cap;                                     \
-    }                                                                \
-                                                                     \
-    void mvec##NAME##_resz(mvec##NAME *v, size_t cap) {              \
-        v->dat = (TYPE *)realloc(v->dat, sizeof(TYPE) * cap);        \
-        if (v->sz > cap) v->sz = cap;                                \
-        v->cap = cap;                                                \
-    }                                                                \
-    mvec##NAME mvec##NAME##_cp(mvec##NAME *v) {                      \
-        mvec##NAME ret;                                              \
-        mvec##NAME##_init(&ret, v->cap);                             \
-        memcpy(ret.dat, v->dat, v->sz * sizeof(TYPE));               \
-        return ret;                                                  \
-    }                                                                \
-                                                                     \
-    void mvec##NAME##_pb(mvec##NAME *v, TYPE elem) {                 \
-        if (v->sz >= v->cap) {                                       \
-            v->cap *= GROWTH_MULT;                                   \
-            v->dat = (TYPE *)realloc(v->dat, sizeof(TYPE) * v->cap); \
-        }                                                            \
-                                                                     \
-        v->dat[v->sz++] = elem;                                      \
-    }                                                                \
-                                                                     \
-    TYPE *mvec##NAME##_ba(mvec##NAME *vec) {                         \
-        return &(vec->dat)[vec->sz - 1];                             \
-    }                                                                \
-                                                                     \
-    void mvec##NAME##_pop(mvec##NAME *vec) {                         \
-        (vec->sz) -= (size_t)(vec->sz > 0);                          \
-    }                                                                \
-                                                                     \
-    void mvec##NAME##_destr(mvec##NAME *vec, void (*df)(TYPE *)) {   \
-        size_t i;                                                    \
-        if (df != NULL) {                                            \
-            for (i = 0; i < vec->sz; ++i) df(&(vec->dat[i]));        \
-        }                                                            \
-        free(vec->dat);                                              \
+#define MVEC_DECL(TYPE, NAME)                                          \
+    typedef struct {                                                   \
+        size_t sz, cap;                                                \
+        void (*ifn)(TYPE *);                                           \
+        TYPE *d;                                                       \
+    } mvec##NAME;                                                      \
+                                                                       \
+    void mvec##NAME##_init(mvec##NAME *, size_t, void (*ifn)(TYPE *)); \
+    void mvec##NAME##_resz(mvec##NAME *, size_t);                      \
+    mvec##NAME mvec##NAME##_cp(const mvec##NAME *);                    \
+    void mvec##NAME##_pb(mvec##NAME *, TYPE);                          \
+    TYPE *mvec##NAME##_ba(mvec##NAME *);                               \
+    void mvec##NAME##_pop(mvec##NAME *);                               \
+    void mvec##NAME##_destr(mvec##NAME *, void (*df)(TYPE *));
+
+#define MVEC_IMPL(TYPE, NAME)                                                \
+    void mvec##NAME##_init(mvec##NAME *v, size_t cap, void (*ifn)(TYPE *)) { \
+        v->d = (TYPE *)malloc(cap * sizeof(TYPE));                           \
+        v->cap = cap, v->sz = 0, v->ifn = ifn;                               \
+        while (ifn != NULL && (cap > 0)) ifn(v->d + --cap);                  \
+    }                                                                        \
+                                                                             \
+    void mvec##NAME##_resz(mvec##NAME *v, size_t ncap) {                     \
+        v->d = (TYPE *)realloc(v->d, sizeof(TYPE) * ncap);                   \
+        if ((v->cap = ncap) < v->sz) v->sz = v->cap;                         \
+        while (v->ifn != NULL && (ncap > 0)) v->ifn(v->d + --ncap);          \
+    }                                                                        \
+                                                                             \
+    mvec##NAME mvec##NAME##_cp(const mvec##NAME *v) {                        \
+        mvec##NAME ret;                                                      \
+        mvec##NAME##_init(&ret, v->cap, NULL);                               \
+        memcpy(ret.d, v->d, v->cap * sizeof(TYPE));                          \
+        ret.ifn = v->ifn; /*avoid running ifn unecessarily */                \
+        return ret;                                                          \
+    }                                                                        \
+                                                                             \
+    void mvec##NAME##_pb(mvec##NAME *v, TYPE elem) {                         \
+        if (v->sz >= v->cap) {                                               \
+            mvec##NAME##_resz(v, v->cap *GROWTH_MULT);                       \
+        }                                                                    \
+        v->d[v->sz++] = elem;                                                \
+    }                                                                        \
+                                                                             \
+    TYPE *mvec##NAME##_ba(mvec##NAME *v) { return &(v->d[v->sz - 1]); }      \
+                                                                             \
+    void mvec##NAME##_pop(mvec##NAME *v) { (v->sz) -= (size_t)(v->sz > 0); } \
+                                                                             \
+    void mvec##NAME##_destr(mvec##NAME *v, void (*dfn)(TYPE *)) {            \
+        while (dfn != NULL && (v->cap > 0)) dfn(v->d + --v->cap);              \
+        free(v->d);                                                          \
     }
 
 #define MVEC(TYPE, NAME)  \
