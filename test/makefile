@@ -19,15 +19,6 @@ mvec_clean:
 
 # -----------------------------------------------
 
-# AMGRAPH----------------------------------------
-meam_test: test_tools.o ../mstruct/meam.h meam_test.c
-	gcc $(CFLAGS) -o meam_test test_tools.o meam_test.c
-
-meam_clean:
-	rm -f meam_test
-
-# -----------------------------------------------
-
 # MDLLIST----------------------------------------
 mdll_test: ../mstruct/mdll.h mdll_test.c
 	gcc $(CFLAGS) -o mdll_test mdll_test.c

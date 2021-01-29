@@ -18,7 +18,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define GROWTH_MULT (1.5)
+#define GROWTH_MULT (1.5f)
 
 #define MVEC_DECL(TYPE, NAME)                                          \
     typedef struct {                                                   \
@@ -43,9 +43,12 @@
     }                                                                        \
                                                                              \
     void mvec##NAME##_resz(mvec##NAME *v, size_t ncap) {                     \
+        size_t szdif = (size_t)(ncap > v->cap) * (ncap - v->cap);            \
         v->d = (TYPE *)realloc(v->d, sizeof(TYPE) * ncap);                   \
+        while (v->ifn != NULL && (szdif > 0)) {                              \
+            v->ifn(v->d + v->cap + --szdif);                                 \
+        }                                                                    \
         if ((v->cap = ncap) < v->sz) v->sz = v->cap;                         \
-        while (v->ifn != NULL && (ncap > 0)) v->ifn(v->d + --ncap);          \
     }                                                                        \
                                                                              \
     mvec##NAME mvec##NAME##_cp(const mvec##NAME *v) {                        \
@@ -63,12 +66,12 @@
         v->d[v->sz++] = elem;                                                \
     }                                                                        \
                                                                              \
-    TYPE *mvec##NAME##_ba(mvec##NAME *v) { return &(v->d[v->sz - 1]); }      \
+    TYPE *mvec##NAME##_ba(mvec##NAME *v) { return v->d + v->sz - 1; }        \
                                                                              \
     void mvec##NAME##_pop(mvec##NAME *v) { (v->sz) -= (size_t)(v->sz > 0); } \
                                                                              \
     void mvec##NAME##_destr(mvec##NAME *v, void (*dfn)(TYPE *)) {            \
-        while (dfn != NULL && (v->cap > 0)) dfn(v->d + --v->cap);              \
+        while (dfn != NULL && (v->cap > 0)) dfn(v->d + --v->cap);            \
         free(v->d);                                                          \
     }
 
