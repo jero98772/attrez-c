@@ -17,7 +17,7 @@ void bench_time(void (*func)(), int times) {
         total += end - start;
     }
 
-    printf("average %f\n", total / timescpy);
+    printf("total: %f, average %f\n", total, total / timescpy);
 }
 
 void print_iarr(int *arr, size_t sz) {

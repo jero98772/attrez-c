@@ -11,14 +11,14 @@
  * - prolly make it so that pop can shrink
  * the vector if its capacity is twice its size
  * or something....also make it so that this can
- * be set at init */
+ * be set at init  */
 
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#define GROWTH_MULT (1.5f)
+static float MVEC_GROWTH_MULT = 1.5f;
 
 #define MVEC_DECL(TYPE, NAME)                                          \
     typedef struct {                                                   \
@@ -61,7 +61,7 @@
                                                                              \
     void mvec##NAME##_pb(mvec##NAME *v, TYPE elem) {                         \
         if (v->sz >= v->cap) {                                               \
-            mvec##NAME##_resz(v, v->cap *GROWTH_MULT);                       \
+            mvec##NAME##_resz(v, v->cap *MVEC_GROWTH_MULT);                  \
         }                                                                    \
         v->d[v->sz++] = elem;                                                \
     }                                                                        \
