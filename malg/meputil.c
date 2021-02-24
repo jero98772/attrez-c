@@ -30,3 +30,9 @@ uint8_t melog32(uint32_t v) {
 
     return DeBruijnMap32[(uint32_t)(v * 0x07C4ACDDU) >> 27];
 }
+
+void dec2bstr(char* str, uint32_t n) {
+    for (uint8_t b = 0; b < 32; ++b) {
+        str[b] = (n % 2) + '0', n /= 2;
+    }
+}

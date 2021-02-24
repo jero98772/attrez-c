@@ -66,6 +66,18 @@ mveb_clean:
 
 # -----------------------------------------------
 
+# MVIB-------------------------------------------
+mbiv.o: ../mstruct/mbiv.h ../mstruct/mbiv.c
+	gcc $(CFLAGS) -c ../mstruct/mbiv.c
+
+mbiv_test: test_tools.o meputil.o mbiv.o mbiv_test.c
+	gcc $(CFLAGS) -o mbiv_test test_tools.o meputil.o mbiv.o mbiv_test.c
+
+
+# -----------------------------------------------
+
+hash_test: meputil.o hash_test.c
+	gcc $(CFLAGS) -o hash_test meputil.o hash_test.c
 
 .PHONY: clean-all
 clean-all:
