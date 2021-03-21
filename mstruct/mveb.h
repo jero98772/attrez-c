@@ -1,9 +1,20 @@
+/* TODO
+ * - generalize the struct
+ *   to take pairs of int-TYPE
+ * - look into how you might
+ *   speed it up
+ * - make it so that old unused
+ *   nodes get freed
+ * - once thats done, document
+ */
+
 #ifndef MVEB_H
 #define MVEB_H
 
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
+
 // a van emde boas tree
 // in terms of sorting power, it seems to be able
 // to beat my mergesort. however, because of the
@@ -12,7 +23,7 @@
 // amounts of unique numbers
 
 typedef struct s_mveb {
-    struct s_mveb **clust;
+                    struct s_mveb **clust;
     struct s_mveb *summ;
     size_t w_size;
     bool *init;

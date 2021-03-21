@@ -1,3 +1,6 @@
+/* TODO
+ * - cleanup and documentation
+ */
 #ifndef MDLL_H
 #define MDLL_H
 

@@ -1,6 +1,5 @@
 # taken from https://en.wikipedia.org/wiki/De_Bruijn_sequence#Algorithm
-# used to generate debruijn numbers
-
+# this program generates deBrujin sequences
 def de_bruijn(k, n: int) -> str:
     """de Bruijn sequence for alphabet k
     and subsequences of length n.

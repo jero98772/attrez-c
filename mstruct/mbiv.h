@@ -1,5 +1,9 @@
-#ifndef MMMBIV_H_
-#define MMMBIV_H_
+/* TODO
+ * - document properly
+ */
+
+#ifndef MBIV_H_
+#define MBIV_H_
 
 #include <stddef.h>
 #include <stdint.h>

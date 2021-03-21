@@ -1,8 +1,13 @@
+/* TODO
+ * - add quick sort
+ * - document code 
+ * - add radix sort  */
+
+
 #ifndef MEPSORT_H
 #define MEPSORT_H
 
-/* MEPhisto's (collection of) SORTing (algs)
- * just some useful sorting algorithms */
+/* just some useful sorting algorithms */
 
 #include <stdbool.h>
 #include <stdlib.h>
@@ -60,7 +65,9 @@
     void merge##NAME(TYPE *arr, size_t q, size_t r,                          \
                      bool (*comp)(TYPE *, TYPE *)) {                         \
         size_t n1 = q, n2 = r - q;                                           \
-        TYPE larr[n1], rarr[n2];                                             \
+        TYPE *larr, *rarr;                                                   \
+        larr = (TYPE *)malloc(n1 * sizeof(TYPE));                            \
+        rarr = (TYPE *)malloc(n2 * sizeof(TYPE));                            \
                                                                              \
         memcpy(larr, arr, sizeof(TYPE) * n1);                                \
         memcpy(rarr, arr + q, sizeof(TYPE) * n2);                            \
@@ -79,6 +86,7 @@
                 }                                                            \
             }                                                                \
         }                                                                    \
+        free(larr), free(rarr);                                              \
     }                                                                        \
                                                                              \
     void mersort##NAME(TYPE *arr, size_t sz, bool (*comp)(TYPE *, TYPE *)) { \

@@ -1,3 +1,12 @@
+/*
+ * TODO:
+ * - prolly make it so that pop can shrink
+ * the vector if its capacity is twice its size
+ * or something....also make it so that this can
+ * be set at init  
+ * - document
+ * */
+
 #ifndef MVEC_H
 #define MVEC_H
 
@@ -5,13 +14,7 @@
  * it allows you to store items of type TYPE.
  * when the vector becomes full, it increases
  * the capacity of the underlying array by
- * GROWTH_MULT
- *
- * TODO:
- * - prolly make it so that pop can shrink
- * the vector if its capacity is twice its size
- * or something....also make it so that this can
- * be set at init  */
+ * GROWTH_MULT */
 
 #include <stddef.h>
 #include <stdio.h>

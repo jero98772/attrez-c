@@ -61,15 +61,15 @@ void test2_mersort() {
     int arrsz = 27;
     double arr[arrsz];
     randdarr(arr, arrsz, 1, 1000);
-    print_darr(arr, arrsz);
+    /*print_darr(arr, arrsz);*/
 
     mersortd(arr, arrsz, defincd);
-    printf("\nsorted ");
-    print_darr(arr, arrsz);
+    /*printf("\nsorted ");*/
+    /*print_darr(arr, arrsz);*/
 
     mersortd(arr, arrsz, defdecd);
-    printf("\nsorted back");
-    print_darr(arr, arrsz);
+    /*printf("\nsorted back");*/
+    /*print_darr(arr, arrsz);*/
 }
 
 void test3_mersort(int times) {
@@ -102,7 +102,7 @@ int main() {
     /*bench_time(test1_insort, 1);*/
     /*bench_time(test2_insort, 1);*/
     /*bench_time(test1_mersort, 1);*/
-    /*bench_time(test2_mersort, 1);*/
+    /*bench_time(test2_mersort, 1000);*/
 
     test3_mersort(100);
 }
