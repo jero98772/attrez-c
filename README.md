@@ -11,7 +11,7 @@ I would be specially thankful for any advice that could be offered in regards to
  
 2. **EZ 2 Use**: The tools should be "comfortable" to use. To a reasonable extent, the tools should be written so that the user is not encumbered by verbose code.
 
-3. **Well-Documented**: All functions and structures should be documented. There should also be small explanations of how the code works and where one might find more information about the algorithm being used where relevant. 
+3. **Well-Documented**: All functions and structures should be documented. There should also be small explanations of how the code works wherever it is relevant. 
 
 ### STRUCTS INCLUDED
 Those marked with (u) are usable as of right now. They are all in constant improvement, however. 
