@@ -15,7 +15,7 @@ I would be specially thankful for any advice that could be offered in regards to
 
 ### STRUCTS INCLUDED
 Those marked with (u) are usable as of right now. They are all in constant improvement, however. 
-- (u) A vector (as in a C++-style vector)
+- (u) A vector (somewhat in the style of a C++ `std::vector<>`)
 - (u) A Van Emde Boas Tree
 - (u) A bitset
 - (u) A doubly-linked list
