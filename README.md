@@ -31,5 +31,4 @@ Those marked with (u) are usable as of right now. They are all in constant impro
 - A priority queue (Fibonacci heap? Probably?)
 - An attempt at a "generalized" Segment-Tree
 - Aho-Corasick automaton
-- Correct random number functions and improve them with `Generic` macro
 - Make a file for default "comparison" functions
