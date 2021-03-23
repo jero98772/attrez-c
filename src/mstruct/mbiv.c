@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-#include "mbiv.h"
+#include "../../include/mstruct/mbiv.h"
 
 void mbiv_init(mbiv* b, size_t s) {
     b->sz = (s / 32) + 1;

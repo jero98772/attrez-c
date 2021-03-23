@@ -1,4 +1,4 @@
-#include "../mstruct/mdll.h"
+#include "mstruct/mdll.h"
 
 #include <stdio.h>
 MDLLIST(int, i)

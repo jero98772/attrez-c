@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../malg/meputil.h"
+#include "malg/meputil.h"
 
 // you need a bit to tell if its occupied
 // and its different from the bit that
