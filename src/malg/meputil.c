@@ -2,7 +2,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-#include "meputil.h"
+#include "malg/meputil.h"
 void randiarr(int* arr, size_t sz, int min, int max) {
     while (sz) arr[--sz] = (rand() % (max - min)) + min;
 }

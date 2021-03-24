@@ -1,4 +1,4 @@
-#include "../mstruct/mvec.h"
+#include "mstruct/mvec.h"
 
 #include <stdio.h>
 

@@ -1,11 +1,11 @@
-#include "../malg/mepsort.h"
+#include "malg/mepsort.h"
 
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
 
-#include "../malg/meputil.h"
+#include "malg/meputil.h"
 #include "test_tools.h"
 
 DEFAULT_COMP(double, d)

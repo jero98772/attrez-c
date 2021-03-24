@@ -1,4 +1,4 @@
-#include "../mstruct/mveb.h"
+#include "mstruct/mveb.h"
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -7,8 +7,8 @@
 #include <string.h>
 #include <time.h>
 
-#include "../malg/mepsort.h"
-#include "../malg/meputil.h"
+#include "malg/mepsort.h"
+#include "malg/meputil.h"
 #include "test_tools.h"
 
 DEFAULT_COMP(int, i)

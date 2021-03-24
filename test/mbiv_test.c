@@ -1,8 +1,8 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-#include "../malg/meputil.h"
-#include "../mstruct/mbiv.h"
+#include "malg/meputil.h"
+#include "mstruct/mbiv.h"
 #include "test_tools.h"
 
 void test1() {

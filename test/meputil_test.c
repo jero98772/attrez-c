@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "../malg/meputil.h"
-#include "../mstruct/mvec.h"
+#include "malg/meputil.h"
+#include "mstruct/mvec.h"
 #include "test_tools.h"
 
 MVEC(uint32_t, u)
