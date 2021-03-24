@@ -37,9 +37,9 @@ int main() {
     srand(time(NULL));
     mvecu_init(&t1vec, 10, NULL);
     // only run one of these first 2 at a time
-    /*bench_time(melog32_test1, 10000000);*/
-    /*bench_time(melog32_test2, 10000000);*/
-    /*bench_time(melog32_test3, 1000);*/
+    bench_time(melog32_test1, 10000000);
+    bench_time(melog32_test2, 10000000);
+    bench_time(melog32_test3, 1000);
 
     mvecu_destr(&t1vec, NULL);
 }

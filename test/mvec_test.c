@@ -70,7 +70,9 @@ void test3() {
 }
 
 int main() {
-    /*bench_time(test1, 1);*/
-    /*bench_time(test2, 1);*/
+    bench_time(test1, 1);
+    bench_time(test2, 1);
+    test1();
+    test2();
     test3();
 }

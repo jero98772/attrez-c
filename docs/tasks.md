@@ -32,3 +32,4 @@ Those marked with ✔️ are usable as of right now. They are all in constant im
 - A priority queue (Fibonacci heap? Probably?)
 - An attempt at a "generalized" Segment-Tree
 - Aho-Corasick automaton
+- testing ✔️

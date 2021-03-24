@@ -50,7 +50,6 @@ void test2() {
 }
 
 int main() {
-    // bench_time(test1, 100000);
+    bench_time(test1, 1000);
     bench_time(test2, 100);
-    //
 }

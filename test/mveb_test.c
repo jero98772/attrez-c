@@ -51,8 +51,8 @@ void test2() {
 }
 
 void test3() {
-    int arrsz = 500000, arr[arrsz];
-    randiarr(arr, arrsz, 1, 10000000);
+    int arrsz = 5000, arr[arrsz];
+    randiarr(arr, arrsz, 1, 10000);
     /*print_iarr(arr, arrsz);*/
     puts("NO REPEATS*******");
 
@@ -91,7 +91,7 @@ void test4(int times) {
     int timescpy = times;
     while (times--) {
         int arrsz = 10000, arr[arrsz];
-        randiarr(arr, arrsz, 1, 1000000);
+        randiarr(arr, arrsz, 1, 10000);
         arrsz = rem_repeats(arr, arrsz);
         mveb *a = mveb_init(32);
 
@@ -111,7 +111,7 @@ void test4(int times) {
 }
 
 void test5() {
-    int max = 10;
+    int max = 5;
     mveb *a = mveb_init(32);
     for (int i = 0; i < max; ++i) {
         mveb_insert(a, i);
@@ -138,7 +138,7 @@ void test6() {
         mveb *a = mveb_init(32);
 
         int arrsz = 100, arr[arrsz];
-        randiarr(arr, arrsz, 1, 1000000);
+        randiarr(arr, arrsz, 1, 10000);
         arrsz = rem_repeats(arr, arrsz);
 
         for (int i = 0; i < arrsz; ++i) {
@@ -151,7 +151,10 @@ void test6() {
 
 int main() {
     srand(time(NULL));
-    /*test5();*/
-    /*test6();*/
+    test1();
+    test2();
     test3();
+    test4(5);
+    test5();
+    test6();
 }

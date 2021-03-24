@@ -99,10 +99,10 @@ void test3_mersort(int times) {
 int main() {
     srand(time(NULL));
 
-    /*bench_time(test1_insort, 1);*/
-    /*bench_time(test2_insort, 1);*/
-    /*bench_time(test1_mersort, 1);*/
-    /*bench_time(test2_mersort, 1000);*/
+    bench_time(test1_insort, 1);
+    bench_time(test2_insort, 1);
+    bench_time(test1_mersort, 1);
+    bench_time(test2_mersort, 1000);
 
     test3_mersort(100);
 }
